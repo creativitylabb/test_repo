@@ -1,0 +1,4 @@
+artifact_download:
+  stage: test
+  script:
+    - 'curl --location --output artifacts.zip "https://gitlab.com/api/v4/projects/35474313/jobs/artifacts/main/download?job=to_del"'
