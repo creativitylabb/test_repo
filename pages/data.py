@@ -9,6 +9,38 @@ from pages.graphs import plot_heatmap
 
 pd.set_option('precision', 2)
 
+#
+import requests
+import pandas as pd
+import zipfile
+
+endpoint = "https://gitlab.com/api/v4/projects/35474313/jobs/artifacts/main/download?job=build-job"
+# data = {"ip": "1.1.2.3"}
+headers = {"Authorization": "Bearer glpat-3jZqLV1_yc-D7bX-v-5z"}
+
+
+
+#test check
+@st.cache
+def get_gitlab_data():
+    """
+    This function return a pandas DataFrame with the data from gitlab.
+    """
+    r = requests.get(endpoint, headers=headers)
+
+    zip_file_name = 'test_downloaded.zip'
+    open(zip_file_name, 'wb').write(r.content)
+
+    with zipfile.ZipFile(zip_file_name, 'r') as zip_ref:
+        zip_ref.extractall(os.path.join('process',"test_new"))
+
+    gitlab_df = pd.read_csv(os.path.join('process','test_new', 'test.csv'))
+    # raw_df = pd.read_csv(os.path.join('process', 'final_pagination_110422.csv'))
+    # raw_df = raw_df.drop(['Unnamed: 0'], axis=1)
+    return gitlab_df
+
+gitlab_df=get_gitlab_data()
+#
 
 @st.cache
 def get_raw_data():
@@ -69,7 +101,9 @@ def app():
     st.title('Data')
 
     # st.write("This is the `Data` page of the multi-page app.")
-
+    #
+    st.dataframe(gitlab_df)
+    #
     st.write("The following is the `air pollution` dataset.")
 
     type_of_data = st.radio(
