@@ -10,28 +10,50 @@ def app():
 
     st.subheader('About')
 
-    ## FALTA O CHECK ON GITHUB
     st.write("""
-    This application provides an overview of the brazilian_houses_to_rent dataset from Kaggle. It is a dataset that provides rent prices for real estate properties in Brazil.
-    The data were provided from this [source](https://www.kaggle.com/rubenssjr/brasilian-houses-to-rent). 
-    You can check on the sidebar:
-    - EDA (Exploratory Data Analysis)
-    - Model Prediction
-    - Model Evaluation
-    The prediction are made regarding to the rent amount utilizing pre trained machine learning models.
-    All the operations in the dataset were already done and stored as csv files inside the data directory. If you want to check the code, go through the notebook directory in the [github repository](https://github.com/arturlunardi/predict_rental_prices_streamlit).
+    This application provides an overview over the pollutants from Brasov, Romania. It provides the ability to inspect the data and to forecast it.
+    The data comes from several sensors, like particulate matter, ozone, carbon dioxide, nitrogen dioxide and others. 
+    The menu contains:
+    - Data 
+    - Air quality
+    - LSTM
+    - Facebook Prophet
+    - Choose Dates-Facebook Prophet
+    - Metrics
+    - Admin
+    
     """)
 
-    st.subheader('Model Definition')
+    st.subheader('Data')
+    st.write(
+        "The Data section provides the posibility to inspect the almost raw data and the clean data, for the several air quality sensors.")
 
-    st.write("""
-    The structure of the training it is to wrap the process around a scikit-learn Pipeline. There were 4 possible combinations and 5 models, resulting in 20 trained models.
-    The combinations are regarding to perform Feature Creation and/or Target Transformations in the dataset.
-    Models:
-    - Random Forest
-    - XGB
-    - Ridge
-    - LGBM
-    - Neural Network
-    Our main accuracy metric is RMSE. To enhance our model definition, we utilized Cross Validation and Random Search for hyperparameter tuning.
-    """)
+    st.subheader('Air quality')
+    st.write(
+        "The air quality section provides the values recorded by the sensors in the last couple of hours, in different latitude and longitude values, considered of interest.")
+
+    st.subheader('LSTM')
+    st.write(
+        "LSTM provides the possibility to predict the values recorded by PM2.5, PM1 or PM10, over a set period of time."
+        "\n The model was trained before, using 80% of data as train.")
+
+    st.subheader('Facebook Prophet')
+    st.write(
+        "Facebook Prophet provides the possibility to predict the values recorded by the air sensors and to choose the train percentage."
+        "\n When choosing *All* as an option, the algorithm takes into consideration the whole period of time since values were recorded.")
+
+    st.write(
+        "LSTM and Facebook Prophet provide the possibility to predict 5 days into the future, based on the previous recorded values.")
+    st.write(
+        "LSTM and Facebook Prophet provide the possibility to one sensor's values based on the other ones, being multivariate forecasts.")
+
+    st.subheader('Choose Dates-Facebook Prophet')
+    st.write(
+        'This section allows the user to choose a certain period when the predictions are made. Also, the user can choose what sensors to be included in the multivariate forecast.')
+
+    st.subheader('Metrics')
+    st.write('Description of the used metrics to establish the performance of the used models.')
+
+    st.subheader('Admin')
+    st.write(
+        'Section used to trigger some background processes, like updating the data, running the models. Requires authorization.')

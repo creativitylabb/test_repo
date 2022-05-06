@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 from sklearn.impute import SimpleImputer
 #
@@ -61,7 +63,7 @@ from sklearn.impute import SimpleImputer
 def clean_data(df):
     # df = pd.read_csv('last_step_pagination_110422.csv', infer_datetime_format=True)
 
-    df = df.drop('Unnamed: 0', axis=1)
+    # df = df.drop('Unnamed: 0', axis=1)
 
     df['TimeStamp'] = pd.to_datetime(df['TimeStamp'], format="%Y-%m-%d %H:%M:%S")
 
@@ -95,10 +97,11 @@ def clean_data(df):
     print('before', df.describe())
 
     # add 0 instead of NaN for pm2.5, pm1 and pm10 as their min is around 0
-    zero_columns = ['pm25', 'pm1', 'pm10']
-    for column in zero_columns:
-        df[column] = df[column].fillna(0)
-    print('columns', df.columns)
+    # zero_columns = ['pm25', 'pm1', 'pm10']
+    # for column in zero_columns:
+    #     df[column] = df[column].fillna(0)
+    # print('columns', df.columns)
+    #todo check impute 0 or most frequent values for pm2.5, pm1 and pm10
 
     sensor_column_names = ['pm25', 'pm1', 'pm10', 'co2', 'o3', 'cho2', 'no2', 'so2']
     imp = SimpleImputer(strategy="most_frequent")
@@ -112,4 +115,6 @@ def clean_data(df):
 
     print('after', df_mean_imputed.describe())
 
-    df_mean_imputed.to_csv('df_imputed_120422.csv')  # DONE NOW 120422
+    # df_mean_imputed.to_csv('df_imputed_120422.csv')  # DONE NOW 120422
+    # df_mean_imputed.to_csv(os.path.join('process','df_imputed_120422.csv'))
+    return df_mean_imputed

@@ -19,8 +19,7 @@ endpoint = "https://gitlab.com/api/v4/projects/35474313/jobs/artifacts/main/down
 headers = {"Authorization": "Bearer glpat-3jZqLV1_yc-D7bX-v-5z"}
 
 
-
-#test check
+# test check
 @st.cache
 def get_gitlab_data():
     """
@@ -32,14 +31,15 @@ def get_gitlab_data():
     open(zip_file_name, 'wb').write(r.content)
 
     with zipfile.ZipFile(zip_file_name, 'r') as zip_ref:
-        zip_ref.extractall(os.path.join('process',"test_new"))
+        zip_ref.extractall(os.path.join('process', "test_new"))
 
-    gitlab_df = pd.read_csv(os.path.join('process','test_new', 'test.csv'))
-    # raw_df = pd.read_csv(os.path.join('process', 'final_pagination_110422.csv'))
-    # raw_df = raw_df.drop(['Unnamed: 0'], axis=1)
+    gitlab_df = pd.read_csv(os.path.join('process', 'test_new', 'test.csv'))
     return gitlab_df
 
-gitlab_df=get_gitlab_data()
+
+gitlab_df = get_gitlab_data()
+
+
 #
 
 @st.cache
@@ -116,7 +116,7 @@ def app():
         data = raw_df.copy()
         st.dataframe(data.style.format({"E": "{:.2f}"}))
 
-    if type_of_data=='Clean Data':
+    if type_of_data == 'Clean Data':
         data = clean_df.copy()
         st.dataframe(data.style.format({"E": "{:.2f}"}))
 

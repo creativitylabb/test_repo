@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 from datetime import datetime
 #
@@ -41,5 +43,5 @@ def average_per_days(df):
     df = df.groupby(['TimeStamp'])[
         ['pm25', 'pm1', 'pm10', 'co2', 'o3', 'cho2', 'no2', 'so2', 'LocationLat', 'LocationLong']].mean().reset_index()
 
-    df.to_csv('last_step_pagination_110422.csv')
+    # df.to_csv(os.path.join('process','last_step_pagination_110422.csv'))
     return df

@@ -1,8 +1,8 @@
 from elasticsearch import Elasticsearch
 from pandas import json_normalize
 import pandas as pd
-from three_create_average_per_days import average_per_days
-from two_clean_data import clean_data
+# from three_create_average_per_days import average_per_days
+# from two_clean_data import clean_data
 
 username = 'elastic'
 password = 'AWbtmGda2Q7BI2bYpdjyF4qd'
@@ -49,12 +49,12 @@ def rename_columns(df):
     return df
 
 
-df = pd.DataFrame()
-
-pagination_df = scroll_page('brasov-dev', '1m', df)
-
-pagination_df = rename_columns(pagination_df)
-
-pagination_df=average_per_days(pagination_df)
-# pagination_df = pd.read_csv('last_step_pagination_110422.csv', infer_datetime_format=True)
-clean_data(pagination_df)
+# df = pd.DataFrame()
+#
+# pagination_df = scroll_page('brasov-dev', '1m', df)
+#
+# pagination_df = rename_columns(pagination_df)
+#
+# pagination_df=average_per_days(pagination_df)
+# # pagination_df = pd.read_csv('last_step_pagination_110422.csv', infer_datetime_format=True)
+# clean_data(pagination_df)

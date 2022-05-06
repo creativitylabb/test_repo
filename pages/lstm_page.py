@@ -83,6 +83,7 @@ def model_lstm(selected_sensor='pm25'):
             df_final['predicted-actual'] = df_final['predicted ' + str(selected_sensor)] - df_final[selected_sensor]
 
             with st.expander("See metrics"):
+                st.dataframe(df_final[['predicted-actual','predicted ' + str(selected_sensor),selected_sensor]])
                 create_metrics(df_final, selected_sensor)
 
 
