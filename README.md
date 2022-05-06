@@ -1,52 +1,33 @@
-streamlit run .\main.py --server.maxMessageSize=500
-
-
 # About
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)]
-(https://share.streamlit.io/creativitylabb/test_repo/main/main.py)
-
-This application provides an overview of the brazilian_houses_to_rent dataset from Kaggle. It is a dataset that provides rent prices for real estate properties in Brazil.
-
-The app it is [deployed](https://share.streamlit.io/arturlunardi/predict_rental_prices_streamlit/main/src/app.py) in Streamlit.
-
-The data were provided from this [source](https://www.kaggle.com/rubenssjr/brasilian-houses-to-rent). 
-
-You can check on the sidebar of the app:
-- EDA (Exploratory Data Analysis)
-- Model Prediction
-- Model Evaluation
-
-The prediction are made regarding to the rent amount utilizing pre trained machine learning models.
-
-All the operations in the dataset were already done and stored as csv files inside the data directory. If you want to check the code, go through the notebook directory in this repository.
-
-# Model Definition
-
-The structure of the training it is to wrap the process around a scikit-learn Pipeline. There were 4 possible combinations and 5 models, resulting in 20 trained models.
-
-The combinations are regarding to perform Feature Creation and/or Target Transformations in the dataset.
-
-Models:
-
-- Random Forest
-- XGB
-- Ridge
-- LGBM
-- Neural Network
-
-Our main accuracy metric is RMSE. To enhance our model definition, we utilized Cross Validation and Random Search for hyperparameter tuning.
+    This application provides an overview over the pollutants from Brasov, Romania. It provides the ability to inspect the data and to forecast it.
+    The data comes from several sensors, like particulate matter, ozone, carbon dioxide, nitrogen dioxide and others. 
+    The menu contains:
+    - Data 
+    - Air quality
+    - LSTM
+    - Facebook Prophet
+    - Choose Dates-Facebook Prophet
+    - Metrics
+    - Admin
+    
+# Deployed Application
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/creativitylabb/test_repo/main/main.py)
 
 # Run the App
 
-To run locally, clone the repository, go to the diretory and install the requirements.
+To run locally, clone the repository, go to the directory and install the requirements.
 
 ```
-pip install -r requirements.txt
+conda env update --file environment.yml --prune
 ```
 
-Now, go to the src directory and run:
+Now, go to the terminal, from the main directory and run:
 
 ```
-streamlit run app.py
+streamlit run main.py 
+```
+*OR*
+```
+streamlit run main.py --server.maxMessageSize=500
 ```
