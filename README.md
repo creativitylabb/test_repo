@@ -3,7 +3,8 @@ streamlit run .\main.py --server.maxMessageSize=500
 
 # About
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/arturlunardi/predict_rental_prices_streamlit/main/src/app.py)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)]
+(https://share.streamlit.io/creativitylabb/test_repo/main/main.py)
 
 This application provides an overview of the brazilian_houses_to_rent dataset from Kaggle. It is a dataset that provides rent prices for real estate properties in Brazil.
 
