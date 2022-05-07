@@ -25,6 +25,7 @@ dependencies:
 - pickle5==0.0.12
 - pip:
   - streamlit
+  - streamlit_authenticator
   - scikit-learn==1.0.2
   - sklearn==0.0
   - tensorflow==2.8.0
