@@ -1,54 +1,56 @@
 import streamlit as st
 import os.path
 
+from pages.data import get_clean_data, get_clean_data_fb
 from pages.models.fb_create_models import create_models
 from pages.models.lstm_create_models import create_model_lstm
-from process.one_pagination import scroll_page, rename_columns
-from process.two_clean_data import clean_data
-from process.three_create_average_per_days import average_per_days
+# from process.one_pagination import scroll_page, rename_columns
+# from process.two_clean_data import clean_data
+# from process.three_create_average_per_days import average_per_days
 import pandas as pd
 import streamlit_authenticator as stauth
 
 
 # test check
-@st.cache(ttl=60 * 60 * 24)
-def get_pagination_data():
-    # df = pd.DataFrame()
-    #
-    # pagination_df = scroll_page('brasov-dev', '1m', df)
-    # pagination_df = rename_columns(pagination_df)
-    # pagination_df = average_per_days(pagination_df)
-    # pagination_df.to_csv(os.path.join('process', 'last_step_pagination_110422.csv'))
-    pagination_df=pd.read_csv(os.path.join('process', 'last_step_pagination_110422.csv'))
-    pagination_df = pagination_df.drop('Unnamed: 0', axis=1)
+# @st.cache(ttl=60 * 60 * 24)
+# def get_pagination_data():
+#     # df = pd.DataFrame()
+#     #
+#     # pagination_df = scroll_page('brasov-dev', '1m', df)
+#     # pagination_df = rename_columns(pagination_df)
+#     # pagination_df = average_per_days(pagination_df)
+#     # pagination_df.to_csv(os.path.join('process', 'last_step_pagination_110422.csv'))
+#     pagination_df=pd.read_csv(os.path.join('process', 'last_step_pagination_110422.csv'))
+#     pagination_df = pagination_df.drop('Unnamed: 0', axis=1)
+#
+#     clean_data_df = clean_data(pagination_df)
+#     clean_data_df.to_csv(os.path.join('process', 'df_imputed_120422.csv'))
+#
+#     return clean_data_df
 
-    clean_data_df = clean_data(pagination_df)
-    clean_data_df.to_csv(os.path.join('process', 'df_imputed_120422.csv'))
 
-    return clean_data_df
-
-
-pagination_data = get_pagination_data()
+# pagination_data = get_pagination_data()
 
 # read df for lstm and fb prophet
-df = pd.read_csv(os.path.join('process', 'df_imputed_120422.csv'), infer_datetime_format=True)
+# df = pd.read_csv(os.path.join('process', 'df_imputed_120422.csv'), infer_datetime_format=True)
+df=get_clean_data()
+clean_df_fb = get_clean_data_fb()
 
-
-@st.cache(ttl=60 * 60 * 25)
+# @st.cache(ttl=60 * 60 * 25)
 def run_fb_model(df):
     # df = pd.read_csv(os.path.join('process', 'df_imputed_120422.csv'), infer_datetime_format=True)
 
-    df['TimeStamp'] = pd.to_datetime(df['TimeStamp'], format="%Y-%m-%d %H:%M:%S")
-
-    df.index = df['TimeStamp']
-    df.index.sort_values()
+    # df['TimeStamp'] = pd.to_datetime(df['TimeStamp'], format="%Y-%m-%d %H:%M:%S")
+    print('df fb ',df.columns)
+    # df.index = df['TimeStamp']
+    # df.index.sort_values()
 
     create_models(df, 'pm25')
     create_models(df, 'pm1')
     create_models(df, 'pm10')
 
 
-@st.cache(ttl=60 * 60 * 25)
+# @st.cache(ttl=60 * 60 * 25)
 def run_lstm_model(df):
     # df = pd.read_csv(os.path.join('process', 'df_imputed_120422.csv'), infer_datetime_format=True)
 
@@ -56,14 +58,17 @@ def run_lstm_model(df):
     df = df.drop('TimeStamp', axis=1)
 
     df = df[['pm25', 'pm1', 'pm10']]
+    create_model_lstm(df=df, column_index=0, sensor_name='pm25', epochs=400)  # create pm2.5 model based on pm1 and pm10
+    create_model_lstm(df=df, column_index=1, sensor_name='pm1', epochs=400)  # create pm2.5 model based on pm1 and pm10
+    create_model_lstm(df=df, column_index=2, sensor_name='pm10', epochs=400)  # create pm2.5 model based on pm1 and pm10
 
-    create_model_lstm(df, column_index=0, sensor_name='pm25')  # pm25
+    # create_model_lstm(df, column_index=0, sensor_name='pm25')  # pm25
     # create_model_lstm(df, column_index=1, sensor_name='pm1')  # pm1
     # create_model_lstm(df, column_index=2, sensor_name='pm10')  # pm10
 
 
-# run_model_fb = run_fb_model(df)
-# run_model_lstm = run_lstm_model(df)
+run_model_fb = run_fb_model(clean_df_fb)
+run_model_lstm = run_lstm_model(df)
 
 
 def app():
@@ -84,11 +89,11 @@ def app():
 
         authenticator.logout('Logout', 'main')
 
-        st.write(pagination_data)
+        # st.write(pagination_data)
 
         if st.sidebar.button('Download pagination data'):
             st.write('downloading started...')
-            get_pagination_data()
+            # get_pagination_data()
 
         if st.sidebar.button('Run Facebook Prophet models'):
             st.write('Run Facebook Prophet started...')

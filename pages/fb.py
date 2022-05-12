@@ -6,7 +6,7 @@ import os
 from plotly import graph_objs as go
 
 # Plot raw data
-from pages.data import clean_df
+from pages.data import clean_df_fb as clean_df
 
 # def plot_fb_data(result, y, yhat, ds):
 #     fig = go.Figure()
@@ -55,6 +55,7 @@ def predict_future_fb(selected_sensor='pm25'):
 
     # predict for next 5 days
     test_length = len(test_df) + 5
+
     df_forecast = fb_prophet_model.make_future_dataframe(periods=test_length, freq='D', include_history=True)
     test_df.reset_index(inplace=True)
     # df_forecast[options[0]] = df_final_renamed[options[0]]
@@ -86,7 +87,8 @@ def predict_future_fb(selected_sensor='pm25'):
     # df_forecast[options[1]][-5:] = df_final_renamed[options[1]][-5:]  # 0
     df_forecast['y'][-5:] = df_final_renamed['y'][-5:]  # 0
     # print('df_forecast for next 5 days \n', df_forecast[-5:])
-    df_test = df_forecast[-test_length:]
+    # df_test = df_forecast[-test_length:]
+    df_test = df_forecast[-5:]
     print('df_forecast for next 5 days \n', df_test)  # get only test data
 
     print('test_df\n', test_df)

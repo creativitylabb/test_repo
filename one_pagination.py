@@ -1,9 +1,10 @@
 from elasticsearch import Elasticsearch
 from pandas import json_normalize
 import pandas as pd
-from three_create_average_per_days import average_per_days
-from two_clean_data import clean_data
+# from three_create_average_per_days import average_per_days
+# from two_clean_data import clean_data
 
+#TODO ADD THESE TO SECRETS
 username = 'elastic'
 password = 'AWbtmGda2Q7BI2bYpdjyF4qd'
 

@@ -18,7 +18,7 @@ def plot_histogram(data, x, height, width):
     return fig
 
 
-@st.cache
+@st.cache(allow_output_mutation=True)
 def plot_line(data, x, y, height, width):
     # USED
     fig = px.line(data, x=x, y=y)

@@ -11,8 +11,29 @@ from keras.models import load_model
 from pages.helper_plot import plot_fb_data
 from pages.home import create_metrics
 from plotly import graph_objs as go
+import numpy as np
+from scipy.stats.stats import pearsonr
+import math
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import r2_score
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 
 df_clean = clean_df.copy()
+
+
+def mean_absolute_percentage_error(y_true, y_pred):
+    y_true, y_pred = np.array(y_true), np.array(y_pred)
+    #     return (np.sum(np.abs((y_pred-y_true) / y_true))/len(y_true))*100
+    return np.mean(np.abs((y_true - y_pred) / y_true)) * 100
+
+
+def cv_error(y_true, y_pred):
+    y_true, y_pred = np.array(y_true), np.array(y_pred)
+    return (np.sqrt(np.sum(np.square(y_pred - y_true)) / (len(y_true) - 1)) / np.mean(y_true)) * 100
+
+
+def smape(A, F):
+    return 100 / len(A) * np.sum(2 * np.abs(F - A) / (np.abs(A) + np.abs(F)))
 
 
 def model_lstm(selected_sensor='pm25'):
@@ -27,17 +48,10 @@ def model_lstm(selected_sensor='pm25'):
             # todo change name
             model = load_model(os.path.join('pages', 'models', 'lstm_model_' + str(selected_sensor) + '.h5'))
 
-            # if selected_sensor == 'pm25':
-            #     model = load_model(os.path.join('pages', 'models', 'lstm_model_pm25.h5'))
-            # elif selected_sensor == 'pm1':
-            #     model = load_model(os.path.join('pages', 'models', 'lstm_model_pm1.h5'))
-            # elif selected_sensor == 'pm10':
-            #     model = load_model(os.path.join('pages', 'models', 'lstm_model_pm10.h5'))
             df = df_clean.copy()
-            df.index = df['TimeStamp']
+            # df.index = df['TimeStamp']
 
             df = df[['pm25', 'pm1', 'pm10']]
-            # df = df.drop('TimeStamp', axis=1)
 
             scaler = MinMaxScaler()
             data_scaled = scaler.fit_transform(df)
@@ -52,8 +66,8 @@ def model_lstm(selected_sensor='pm25'):
 
             x_train, x_test, y_train, y_test = train_test_split(features, target, test_size=0.2, random_state=123,
                                                                 shuffle=False)  # just pass features, not time
-            win_length = 2  # random
-            batch_size = 128  # 32  #training to be faster
+            win_length = 1  # random
+            batch_size = 24  # 32  #training to be faster
             test_generator = TimeseriesGenerator(x_test, y_test, length=win_length, sampling_rate=1,
                                                  batch_size=batch_size)
 
@@ -83,8 +97,30 @@ def model_lstm(selected_sensor='pm25'):
             df_final['predicted-actual'] = df_final['predicted ' + str(selected_sensor)] - df_final[selected_sensor]
 
             with st.expander("See metrics"):
-                st.dataframe(df_final[['predicted-actual','predicted ' + str(selected_sensor),selected_sensor]])
+                st.dataframe(df_final[['predicted-actual', 'predicted ' + str(selected_sensor), selected_sensor]])
                 create_metrics(df_final, selected_sensor)
+                #
+
+                mape_score_test = round(mean_absolute_percentage_error(df_final[selected_sensor],
+                                                                       df_final['predicted ' + str(selected_sensor)]),
+                                        2)
+
+                cv_score_test = round(
+                    cv_error(df_final[selected_sensor], df_final['predicted ' + str(selected_sensor)]), 2)
+
+                smape_score_test = round(
+                    smape(df_final[selected_sensor], df_final['predicted ' + str(selected_sensor)]), 2)
+
+                pearson_score_test = round(
+                    pearsonr(df_final['predicted ' + str(selected_sensor)], df_final[selected_sensor])[0], 3)
+
+                st.write("mape_score_test ", mape_score_test)
+                st.write("cv_score_test ", cv_score_test)
+                st.write("smape_score_test ", smape_score_test)
+                st.write("pearson_score_test ", pearson_score_test)
+
+
+#
 
 
 def future_data(selected_sensor):
