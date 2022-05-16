@@ -151,20 +151,22 @@ def create_visualization(data):
             sensor_names.remove(item)
     except ValueError:
         pass
-    st.header('Histogram Visualization')
+    #st.header('Histogram Visualization')
 
     select_sensor = st.selectbox(
         'Select a sensor from the list',
         [i for i in sensor_names]
     )
 
-    st.subheader('Scatterplot')
+    st.subheader('Histogram')
     # sensor_names = list(data.columns)
     # for item in ['TimeStamp', 'LocationLat', 'LocationLong']:
     #     sensor_names.remove(item)
 
     fig = graphs.plot_histogram(data=data, x=select_sensor, height=500, width=950)
     st.plotly_chart(fig)
+    
+    st.subheader('Line Plot')
 
     fig = graphs.plot_line(data=data, x=data['TimeStamp'], y=select_sensor, height=500, width=700)
 
@@ -193,6 +195,7 @@ def app():
 
     elif type_of_data == 'Clean Data':
         data = clean_df.copy()
+        st.dataframe(data)
         # st.dataframe(data.style.format({"E": "{:.2f}"}))
     else:
         data = raw_df.copy()
