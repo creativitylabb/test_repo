@@ -26,7 +26,7 @@ def app():
 
     st.subheader('Data')
     st.write(
-        "The Data section provides the posibility to inspect the almost raw data and the clean data, for the several air quality sensors.")
+        "The Data section provides the possibility to inspect the almost raw data and the clean data, for the several air quality sensors.")
 
     st.subheader('Air quality')
     st.write(
