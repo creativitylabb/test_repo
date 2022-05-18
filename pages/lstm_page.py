@@ -180,8 +180,8 @@ def future_data(selected_sensor):
 
             x_train, x_test, y_train, y_test = train_test_split(features, target, test_size=0.2, random_state=123,
                                                                 shuffle=False)  # just pass features, not time
-            win_length = 2  # random
-            batch_size = 128  # 32  #training to be faster
+            win_length = 1  # random
+            batch_size = 24  # 32  #training to be faster
             test_generator = TimeseriesGenerator(x_test, y_test, length=win_length, sampling_rate=1,
                                                  batch_size=batch_size)
 
