@@ -1,6 +1,6 @@
 import streamlit as st
 from multiapp import MultiApp
-from pages import welcome, home, data, lstm_page, aqi_now, fb, info,admin,upload_file  # import app modules here
+from pages import welcome, home, data, lstm_page, aqi_now, fb, info,admin,fb_custom,eda,xgboost_page  # import app modules here
 
 # st.set_page_config(
 #     page_title="Predicting Air Quality in Brasov",
@@ -34,11 +34,13 @@ st.markdown("""
 # Add all your application here
 app.add_app("Introduction", welcome.app)
 app.add_app("Data", data.app)
+app.add_app("Custom Data-Explore", eda.app)
 app.add_app("Air quality", aqi_now.app)
 app.add_app("LSTM", lstm_page.app)
 app.add_app('Facebook Prophet', fb.app)
 app.add_app("Choose Dates-Facebook Prophet", home.app)
-app.add_app("Upload", upload_file.app)
+app.add_app("Custom Dataset-Facebook Prophet", fb_custom.app)
+app.add_app("XGBoost", xgboost_page.app)
 
 app.add_app("Metrics", info.app)
 app.add_app("Admin", admin.app)

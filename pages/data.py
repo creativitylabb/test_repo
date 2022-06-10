@@ -84,6 +84,7 @@ def get_clean_data():
     # imp = SimpleImputer(strategy="most_frequent")
     # df_mean_imputed = pd.DataFrame(imp.fit_transform(df.iloc[:, 0:]), columns=sensor_column_names)
 
+    # clean_df = clean_df.interpolate(method='linear', axis=0).ffill().bfill()
     clean_df = clean_df.interpolate(method='linear', axis=0).ffill().bfill()
 
     clean_df['TimeStamp'] = clean_df.index

@@ -120,3 +120,5 @@ handy_examples_disertatie/*
 __pycache__/
 *.ipynb
 .ipynb_checkpoints
+
+attempt/*

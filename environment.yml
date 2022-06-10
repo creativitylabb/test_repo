@@ -31,3 +31,4 @@ dependencies:
   - tensorflow==2.8.0
   - setuptools-git==1.2
   - cmdstanpy==0.9.5
+  - missingno

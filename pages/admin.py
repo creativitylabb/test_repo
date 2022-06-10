@@ -33,6 +33,7 @@ import streamlit_authenticator as stauth
 
 # read df for lstm and fb prophet
 # df = pd.read_csv(os.path.join('process', 'df_imputed_120422.csv'), infer_datetime_format=True)
+
 df=get_clean_data()
 clean_df_fb = get_clean_data_fb()
 
@@ -66,9 +67,10 @@ def run_lstm_model(df):
     # create_model_lstm(df, column_index=1, sensor_name='pm1')  # pm1
     # create_model_lstm(df, column_index=2, sensor_name='pm10')  # pm10
 
+# todo uncomment these
 
-run_model_fb = run_fb_model(clean_df_fb)
-run_model_lstm = run_lstm_model(df)
+# run_model_fb = run_fb_model(clean_df_fb)
+# run_model_lstm = run_lstm_model(df)
 
 
 def app():
