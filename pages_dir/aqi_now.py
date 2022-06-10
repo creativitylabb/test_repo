@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 from datetime import datetime
 import json
 
-json_file = open(os.path.join('pages', 'resources', 'credentials.json'))
+json_file = open(os.path.join('pages_dir', 'resources', 'credentials.json'))
 json_data = json.load(json_file)
 
 

@@ -204,7 +204,7 @@ def create_model_lstm(df, column_index, sensor_name,epochs):
     # df_final['pm25_Pred'] = rev_trans[:, 0]  # get only first column, pm10 predicted column
     # df_final[['pm25', 'pm25_Pred']].plot()
     model.save(
-        os.path.join('pages', 'models', 'lstm_model_' + str(sensor_name) + '.h5'))  # creates a HDF5 file 'my_model.h5'
+        os.path.join('pages_dir', 'models', 'lstm_model_' + str(sensor_name) + '.h5'))  # creates a HDF5 file 'my_model.h5'
 
 # create_model_lstm(column_index=0, sensor_name='pm25')  # pm25
 # create_model_lstm(column_index=1, sensor_name='pm1')  # pm1

@@ -1,11 +1,11 @@
 import streamlit as st
 import pandas as pd
 import os
-from pages import data_helper
-from pages import graphs
+from pages_dir import data_helper
+from pages_dir import graphs
 import numpy as np
 
-from pages.graphs import plot_heatmap
+from pages_dir.graphs import plot_heatmap
 
 pd.set_option('precision', 2)
 

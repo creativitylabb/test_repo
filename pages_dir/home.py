@@ -7,10 +7,10 @@ from datetime import datetime
 
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 
-from pages import graphs, info
-from pages.data import clean_df
+from pages_dir import graphs, info
+from pages_dir.data import clean_df
 
-from pages.helper_plot import plot_fb_data, convert_df
+from pages_dir.helper_plot import plot_fb_data, convert_df
 
 df_final = clean_df.copy()
 

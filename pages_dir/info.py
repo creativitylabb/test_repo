@@ -9,7 +9,7 @@ def app():
     st.title('Metrics')
 
     """### gif from local file"""
-    file_ = open(os.path.join('pages', 'resources', 'metrics2.gif'), "rb")
+    file_ = open(os.path.join('pages_dir', 'resources', 'metrics2.gif'), "rb")
     contents = file_.read()
     data_url = base64.b64encode(contents).decode("utf-8")
     file_.close()

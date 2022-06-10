@@ -1,5 +1,5 @@
 import streamlit as st
-from pages.data import clean_df
+from pages_dir.data import clean_df
 import os
 import pandas as pd
 
@@ -8,8 +8,8 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 from keras.models import load_model
 
-from pages.helper_plot import plot_fb_data
-from pages.home import create_metrics
+from pages_dir.helper_plot import plot_fb_data
+from pages_dir.home import create_metrics
 from plotly import graph_objs as go
 import numpy as np
 from scipy.stats.stats import pearsonr
@@ -46,7 +46,7 @@ def model_lstm(selected_sensor='pm25'):
             #     open(os.path.join('pages', 'models', 'lstm_model_pm25.pkl'), 'rb'))  # predicts pm25
 
             # todo change name
-            model = load_model(os.path.join('pages', 'models', 'lstm_model_' + str(selected_sensor) + '.h5'))
+            model = load_model(os.path.join('pages_dir', 'models', 'lstm_model_' + str(selected_sensor) + '.h5'))
 
             df = df_clean.copy()
             # df.index = df['TimeStamp']
@@ -131,7 +131,7 @@ def future_data(selected_sensor):
             #     open(os.path.join('pages', 'models', 'lstm_model_pm25.pkl'), 'rb'))  # predicts pm25
 
             # todo change name
-            model = load_model(os.path.join('pages', 'models', 'lstm_model_' + str(selected_sensor) + '.h5'))
+            model = load_model(os.path.join('pages_dir', 'models', 'lstm_model_' + str(selected_sensor) + '.h5'))
 
             # if selected_sensor == 'pm25':
             #     model = load_model(os.path.join('pages', 'models', 'lstm_model_pm25.h5'))

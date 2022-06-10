@@ -1,6 +1,6 @@
 import streamlit as st
 from multiapp import MultiApp
-from pages import welcome, home, data, lstm_page, aqi_now, fb, info,admin,fb_custom,eda,xgboost_page  # import app modules here
+from pages_dir import welcome, home, data, lstm_page, aqi_now, fb, info,admin,fb_custom,eda,xgboost_page  # import app modules here
 
 # st.set_page_config(
 #     page_title="Predicting Air Quality in Brasov",

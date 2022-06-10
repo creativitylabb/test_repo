@@ -6,7 +6,7 @@ import os
 from plotly import graph_objs as go
 
 # Plot raw data
-from pages.data import clean_df_fb as clean_df
+from pages_dir.data import clean_df_fb as clean_df
 
 # def plot_fb_data(result, y, yhat, ds):
 #     fig = go.Figure()
@@ -19,8 +19,8 @@ from pages.data import clean_df_fb as clean_df
 # @st.cache
 # def convert_df(df):
 #     return df.to_csv().encode('utf-8')
-from pages.helper_plot import convert_df, plot_fb_data
-from pages.home import create_metrics
+from pages_dir.helper_plot import convert_df, plot_fb_data
+from pages_dir.home import create_metrics
 
 df_final = clean_df.copy()
 
@@ -30,16 +30,16 @@ def predict_future_fb(selected_sensor='pm25'):
     # predict pm25 using 80% training data
     if selected_sensor == 'pm25':
         fb_prophet_model = pickle.load(
-            open(os.path.join('pages', 'models', 'fb_prophet_model_pm25.pkl'), 'rb'))  # predicts pm25
+            open(os.path.join('pages_dir', 'models', 'fb_prophet_model_pm25.pkl'), 'rb'))  # predicts pm25
     elif selected_sensor == 'pm1':
         fb_prophet_model = pickle.load(
-            open(os.path.join('pages', 'models', 'fb_prophet_model_pm1.pkl'), 'rb'))  # predicts pm1
+            open(os.path.join('pages_dir', 'models', 'fb_prophet_model_pm1.pkl'), 'rb'))  # predicts pm1
     elif selected_sensor == 'pm10':
         fb_prophet_model = pickle.load(
-            open(os.path.join('pages', 'models', 'fb_prophet_model_pm10.pkl'), 'rb'))  # predicts pm10
+            open(os.path.join('pages_dir', 'models', 'fb_prophet_model_pm10.pkl'), 'rb'))  # predicts pm10
     else:
         fb_prophet_model = pickle.load(
-            open(os.path.join('pages', 'models', 'fb_prophet_model_pm25.pkl'), 'rb'))  # predicts pm25
+            open(os.path.join('pages_dir', 'models', 'fb_prophet_model_pm25.pkl'), 'rb'))  # predicts pm25
     # options = ['pm25', 'pm1', 'pm10']
     # options.remove(selected_sensor)
     # print('not_selected', options)

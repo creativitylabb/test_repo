@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from xgboost import XGBRegressor
 import streamlit as st
 # df = pd.read_csv("data.csv", header=0, parse_dates=["Time"])
-from pages.data import clean_df
+from pages_dir.data import clean_df
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import numpy as np

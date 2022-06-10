@@ -25,7 +25,7 @@ def create_models(aq_df,sensor_name):
     model.add_regressor(options[1], standardize=False)
     model.fit(train_df)
 
-    pickle.dump(model, open(os.path.join('pages','models','fb_prophet_model_' + str(sensor_name) + '.pkl'), 'wb'))
+    pickle.dump(model, open(os.path.join('pages_dir','models','fb_prophet_model_' + str(sensor_name) + '.pkl'), 'wb'))
     # pickle.dump(model,open('fb_prophet_model_pm1.pkl','wb'))
     # pickle.dump(model,open('fb_prophet_model_pm10.pkl','wb'))
 

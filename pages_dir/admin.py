@@ -1,9 +1,9 @@
 import streamlit as st
 import os.path
 
-from pages.data import get_clean_data, get_clean_data_fb
-from pages.models.fb_create_models import create_models
-from pages.models.lstm_create_models import create_model_lstm
+from pages_dir.data import get_clean_data, get_clean_data_fb
+from pages_dir.models.fb_create_models import create_models
+from pages_dir.models.lstm_create_models import create_model_lstm
 # from process.one_pagination import scroll_page, rename_columns
 # from process.two_clean_data import clean_data
 # from process.three_create_average_per_days import average_per_days
