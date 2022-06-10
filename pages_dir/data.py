@@ -66,7 +66,7 @@ def get_clean_data():
 
     # df = df.drop('Unnamed: 0', axis=1)
 
-    clean_df['TimeStamp'] = pd.to_datetime(clean_df['TimeStamp'], format="%Y-%m-%d %H:%M:%S")
+    # clean_df['TimeStamp'] = pd.to_datetime(clean_df['TimeStamp'], format="%Y-%m-%d %H:%M:%S")
 
     # clean_df.index = clean_df['TimeStamp']
     # clean_df.index.sort_values()
