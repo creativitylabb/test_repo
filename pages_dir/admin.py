@@ -69,8 +69,8 @@ def run_lstm_model(df):
 
 # todo uncomment these
 
-run_model_fb = run_fb_model(clean_df_fb)
-run_model_lstm = run_lstm_model(df)
+# run_model_fb = run_fb_model(clean_df_fb)
+# run_model_lstm = run_lstm_model(df)
 
 
 def app():

@@ -5,7 +5,7 @@ from PIL import Image
 
 def app():
     st.title('Introduction')
-    image = Image.open(os.path.join('pages', 'resources', 'welcome.jpg'))
+    image = Image.open(os.path.join('pages_dir', 'resources', 'welcome.jpg'))
     st.image(image, caption='Air pollution')
 
     st.subheader('About')
