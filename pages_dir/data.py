@@ -63,7 +63,7 @@ def get_clean_data():
     # clean_df = pd.read_csv(os.path.join('process', 'df_imputed_120422.csv'))
     # clean_df = pd.read_csv(os.path.join('process', 'df_imputed_120422.csv'))
     # clean_df = clean_df.drop(['TimeStamp.1'], axis=1)
-    clean_df = pd.read_csv(os.path.join('process', 'last_step_pagination_110422.csv'))
+    clean_df = pd.read_csv(os.path.join('process', 'last_step_pagination_110422.csv'), infer_datetime_format=True)
 
     # df = df.drop('Unnamed: 0', axis=1)
 
