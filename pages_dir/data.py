@@ -55,6 +55,7 @@ def get_raw_data():
 
 # @st.cache
 # @st.cache(allow_output_mutation=True)
+@st.cache
 def get_clean_data():
     """
     This function return a pandas DataFrame with the clean data.
